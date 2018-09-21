@@ -9,7 +9,6 @@ public class MonthDay {
             System.out.println("Please input right month!");
             month=Ipmonth_Int.nextInt();
         }
-        //int day=new Days(month);
         System.out.println(new Days(month).DaysOP());
     }
 }
