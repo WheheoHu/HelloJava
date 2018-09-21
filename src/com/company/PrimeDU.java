@@ -9,10 +9,6 @@ import java.awt.*;
 public class PrimeDU {
 
     private static final int PRIMER_TABLE_SIZE = 10000;
-
-
-
-
     public static void main(String[] args) {
         Scanner Ip_Limit=new Scanner(System.in);
         int upperlimit =Ip_Limit.nextInt();
