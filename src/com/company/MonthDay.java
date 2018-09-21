@@ -10,14 +10,16 @@ public class MonthDay {
             month=Ipmonth_Int.nextInt();
         }
         //int day=new Days(month);
-        System.out.println(new Days().DaysOP(month));
+        System.out.println(new Days(month).DaysOP());
     }
 }
 class Days{
     private int days=0;
-    Days(){
+    private int month=0;
+    Days(int ip_month){
+        month=ip_month;
     }
-    public int DaysOP(int month){
+    public int DaysOP(){
 
         switch(month){
             case 1:days= 31;break;
