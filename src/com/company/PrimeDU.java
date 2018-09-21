@@ -3,10 +3,15 @@ package com.company;
 
 import java.util.Scanner;
 import java.util.Arrays;
+import java.applet.*;
+import java.awt.*;
 
 public class PrimeDU {
 
-    private static final int PRIMER_TABLE_SIZE = 1000;
+    private static final int PRIMER_TABLE_SIZE = 10000;
+
+
+
 
     public static void main(String[] args) {
         Scanner Ip_Limit=new Scanner(System.in);
