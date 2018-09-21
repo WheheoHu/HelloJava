@@ -18,26 +18,30 @@ public class PrimeDU {
             lowerlimit=temp;
         }
     Primer_Table PT=new Primer_Table(PRIMER_TABLE_SIZE);
-        for (int i = lowerlimit; i < upperlimit; i++) {
-            if (PT.isPrimer(i)){
-                System.out.println(i);
+        if (upperlimit<=PRIMER_TABLE_SIZE) {
+            for (int i = lowerlimit; i < upperlimit; i++) {
+                if (PT.isPrimer(i)) {
+                    System.out.println(i);
+                }
             }
         }
-
     }
 }
 
 class Primer_Table{
-    Primer_Table(int size){
-        SizeOfTable=size;
-        PrimerTable(SizeOfTable);
-    }
+
     private int SizeOfTable;
-    private boolean[] primer=new boolean[SizeOfTable];
+    private boolean[] primer;
+    Primer_Table(int size){
+        SizeOfTable=size+1;
+        primer=new boolean[SizeOfTable];
+        InitPrimerTable(SizeOfTable);
+
+    }
     public boolean isPrimer(int Num){
         return primer[Num];
     }
-    public void PrimerTable(int SizeOfTable){
+    public void InitPrimerTable(int SizeOfTable){
         Arrays.fill(primer,true);
         primer[0]=false;
         primer[1]=false;
