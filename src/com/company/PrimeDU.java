@@ -1,15 +1,20 @@
 //打一个Size的素数表，上限超过Size的数据再另外判断
 package com.company;
 
+
+
 import java.util.Scanner;
 import java.util.Arrays;
-import java.applet.*;
-import java.awt.*;
+
 
 public class PrimeDU {
-
     private static final int PRIMER_TABLE_SIZE = 10000;
+
+
     public static void main(String[] args) {
+
+
+
         Scanner Ip_Limit=new Scanner(System.in);
         int upperlimit =Ip_Limit.nextInt();
         int lowerlimit =Ip_Limit.nextInt();
@@ -18,14 +23,20 @@ public class PrimeDU {
             upperlimit=lowerlimit;
             lowerlimit=temp;
         }
-    Primer_Table PT=new Primer_Table(PRIMER_TABLE_SIZE);
-        if (upperlimit<=PRIMER_TABLE_SIZE) {
+        int primertable=PRIMER_TABLE_SIZE;
+        while(upperlimit>primertable){
+            primertable+=PRIMER_TABLE_SIZE;
+        }
+    Primer_Table PT=new Primer_Table(primertable);
+
             for (int i = lowerlimit; i < upperlimit; i++) {
                 if (PT.isPrimer(i)) {
                     System.out.println(i);
                 }
             }
-        }
+
+
+
     }
 }
 
