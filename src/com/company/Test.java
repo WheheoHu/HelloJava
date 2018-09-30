@@ -1,21 +1,22 @@
 package com.company;
 
-public class Student {
+public class Test {
     public static void main(String[] args) {
-        Student_class S_class=new Student_class(2333,213,404,"fool","unknown");
+        Student S_class=new Student(2333,213,404,"fool","unknown");
         System.out.println(S_class.toString());
     }
 }
 
-class Student_class{
+
+class Student {
     private int idnumber;
     private int inclass;
     private  String name;
     private  String gender;
     private  int age;
     private  String allimfor;
-    Student_class(){}
-    Student_class(int idnumber,int inclass,int age,String name,String gender){
+    Student(){}
+    Student(int idnumber, int inclass, int age, String name, String gender){
         this.name=name;
         this.age=age;
         this.gender=gender;
