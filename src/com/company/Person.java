@@ -47,6 +47,10 @@ class Employee extends Person{
         salary+=inc;
     }
 
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
     public int getSalary() {
         return salary;
     }
@@ -111,7 +115,8 @@ class Manager extends Employee{
         this.allowance = allowance;
     }
 
-    final int upSalary(int inc1, int inc2){return getSalary()+inc1+inc2;
+    final void upSalary(int inc1, int inc2){
+         this.setSalary(getSalary()+inc1+inc2);
     }
 
     @Override
@@ -129,7 +134,7 @@ final  class Director extends Manager{
         this.telephone = telephone;
         this.department = department;
     }
-    
+
     public void setTelephone(int telephone) {
         this.telephone = telephone;
     }
