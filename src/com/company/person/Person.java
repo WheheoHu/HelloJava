@@ -1,4 +1,4 @@
-package com.company;
+package com.company.person;
 
 public abstract class Person {
     private String name;
@@ -16,10 +16,11 @@ public abstract class Person {
     final String getName() {
         return name;
     }
+
     abstract String getINFO();
 }
 
-class Customer extends Person{
+class Customer extends Person {
     private int custno;
 
     public Customer(String name, char sex, int custno) {
@@ -29,10 +30,11 @@ class Customer extends Person{
 
     @Override
     String getINFO() {
-     return getName()+getSex()+custno;
+        return getName() + getSex() + custno;
     }
 }
-class Employee extends Person{
+
+class Employee extends Person {
     static int c_minSalary;
     private int age;
     private int salary;
@@ -43,8 +45,8 @@ class Employee extends Person{
         this.salary = salary;
     }
 
-    final void upSalary(int inc){
-        salary+=inc;
+    final void upSalary(int inc) {
+        salary += inc;
     }
 
     public void setSalary(int salary) {
@@ -57,10 +59,11 @@ class Employee extends Person{
 
     @Override
     String getINFO() {
-        return getName()+c_minSalary+age+salary;
+        return getName() + c_minSalary + age + salary;
     }
 }
-final class VipCust extends Customer{
+
+final class VipCust extends Customer {
     static int c_vno;
     private int vipno;
 
@@ -71,12 +74,12 @@ final class VipCust extends Customer{
 
     @Override
     String getINFO() {
-        return super.getINFO()+c_vno+vipno;
+        return super.getINFO() + c_vno + vipno;
     }
 }
 
 
-final  class Engineer extends Employee{
+final class Engineer extends Employee {
 
     private String title;
 
@@ -87,11 +90,11 @@ final  class Engineer extends Employee{
 
     @Override
     String getINFO() {
-        return super.getINFO()+title;
+        return super.getINFO() + title;
     }
 }
 
-final class Secretary extends Employee{
+final class Secretary extends Employee {
 
     private String office;
 
@@ -102,11 +105,11 @@ final class Secretary extends Employee{
 
     @Override
     String getINFO() {
-        return super.getINFO()+office;
+        return super.getINFO() + office;
     }
 }
 
-class Manager extends Employee{
+class Manager extends Employee {
 
     private int allowance;
 
@@ -115,19 +118,19 @@ class Manager extends Employee{
         this.allowance = allowance;
     }
 
-    final void upSalary(int inc1, int inc2){
-         this.setSalary(getSalary()+inc1+inc2);
+    final void upSalary(int inc1, int inc2) {
+        this.setSalary(getSalary() + inc1 + inc2);
     }
 
     @Override
     String getINFO() {
-        return super.getINFO()+allowance;
+        return super.getINFO() + allowance;
     }
 }
 
-final  class Director extends Manager{
+final class Director extends Manager {
     private int telephone;
-    private  String department;
+    private String department;
 
     public Director(String name, char sex, int age, int salary, int allowance, int telephone, String department) {
         super(name, sex, age, salary, allowance);
@@ -145,6 +148,6 @@ final  class Director extends Manager{
 
     @Override
     String getINFO() {
-        return super.getINFO()+telephone+department;
+        return super.getINFO() + telephone + department;
     }
 }
