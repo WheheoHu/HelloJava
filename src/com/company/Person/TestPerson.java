@@ -7,5 +7,7 @@ public class TestPerson {
         System.out.println(Dir.getSalary());
         Dir.upSalary(100, 100);
         System.out.println(Dir.getSalary());
+
+
     }
 }
