@@ -30,7 +30,7 @@ class Customer extends Person {
 
     @Override
     String getINFO() {
-        return getName() + getSex() + custno;
+        return getName() + " " + getSex() + " " + custno;
     }
 }
 
@@ -59,7 +59,7 @@ class Employee extends Person {
 
     @Override
     String getINFO() {
-        return getName() + c_minSalary + age + salary;
+        return getName() + " " + c_minSalary + " " + age + " " + salary;
     }
 }
 
@@ -74,7 +74,7 @@ final class VipCust extends Customer {
 
     @Override
     String getINFO() {
-        return super.getINFO() + c_vno + vipno;
+        return super.getINFO() + " " + c_vno + vipno;
     }
 }
 
@@ -90,7 +90,7 @@ final class Engineer extends Employee {
 
     @Override
     String getINFO() {
-        return super.getINFO() + title;
+        return super.getINFO() + " " + title;
     }
 }
 
@@ -105,7 +105,7 @@ final class Secretary extends Employee {
 
     @Override
     String getINFO() {
-        return super.getINFO() + office;
+        return super.getINFO() + " " + office;
     }
 }
 
@@ -124,7 +124,7 @@ class Manager extends Employee {
 
     @Override
     String getINFO() {
-        return super.getINFO() + allowance;
+        return super.getINFO() + " " + allowance;
     }
 }
 
@@ -148,6 +148,6 @@ final class Director extends Manager {
 
     @Override
     String getINFO() {
-        return super.getINFO() + telephone + department;
+        return super.getINFO() + " " + telephone + " " + department;
     }
 }
