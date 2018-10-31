@@ -8,7 +8,7 @@ public class Student {
     private String stu_no;
     private String name;
     private String sex;
-    private int class_no;
+    private String class_no;
     private String major;
     private List sc=new ArrayList();
     void Select_Course(Student_Courses student_courses){
