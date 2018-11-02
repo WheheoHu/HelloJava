@@ -45,27 +45,90 @@ public class Test {
     static void EleClass() {
         System.out.println("请输入学生序号");
         for (int i = 0; i < studentList.size(); i++) {
-            System.out.println((i + 1)+". 姓名:"+studentList.get(i).getName()+" 学号:"+studentList.get(i).getStu_no());
+            System.out.println((i + 1) + ". 姓名:" + studentList.get(i).getName() + " 学号:" + studentList.get(i).getStu_no());
         }
-        Scanner inputindex=new Scanner(System.in);
-        int index=inputindex.nextInt();
-        while (index>studentList.size()||index<1){
+        Scanner inputindex = new Scanner(System.in);
+        int index = inputindex.nextInt();
+        while (index > studentList.size() || index < 1) {
             for (int i = 0; i < studentList.size(); i++) {
-                System.out.println((i + 1)+". 姓名:"+studentList.get(i).getName()+" 学号:"+studentList.get(i).getStu_no());
+                System.out.println((i + 1) + ". 姓名:" + studentList.get(i).getName() + " 学号:" + studentList.get(i).getStu_no());
             }
             System.out.println("序号非法重新输入序号：");
-            Scanner reinput=new Scanner(System.in);
-            index=reinput.nextInt();
+            Scanner reinput = new Scanner(System.in);
+            index = reinput.nextInt();
         }
 
-        Student stu=studentList.get(index-1);
+        Student stu = studentList.get(index - 1);
+        boolean EXIT = false;
+        while (!EXIT) {
+            System.out.println("选择操作：");
+            System.out.println("1.添加课程");
+            System.out.println("2.删除课程");
+            System.out.println("3.显示成绩");
+            System.out.println("4.返回上级");
+            int stuop_int = new Scanner(System.in).nextInt();
+            switch (stuop_int) {
+                case 1:
+                    System.out.println("输入课程编码：");
+                    for (int i = 0; i < coursesList.size(); i++) {
+                        System.out.println(coursesList.get(i).getCourse_no() + " " + coursesList.get(i).getCourse_name());
+                    }
+                    String class_no_add = new Scanner(System.in).next();
+                    stu.Select_Course(class_no_add);
+                    break;
+                case 2:
+                    if (stu.sc.size() == 0) {
+                        System.out.println("\n未选课\n");
+                        break;
+                    }
+                    System.out.println("输入课程编码：");
+                    for (int i = 0; i < stu.sc.size(); i++) {
+                        System.out.println("课程编码:" + stu.sc.get(i).getCourse_no());
+                    }
+                    String class_no_del = new Scanner(System.in).next();
+                    stu.Delete_Course(class_no_del);
+                    break;
+                case 3:
+                    stu.Disp_Score();
+                    break;
+                case 4:
+                    EXIT = true;
+                    break;
+            }
+        }
+    }
 
-        System.out.println("选择操作：");
-        System.out.println("1.添加课程");
-        System.out.println("2.删除课程");
-        System.out.println("3.显示成绩");
-        Scanner stuop=new Scanner(System.in);
-
+    static void TeacherClass() {
+        System.out.println("输入教师序号：");
+        for (int i = 0; i < teachersList.size(); i++) {
+            Teachers temp = teachersList.get(i);
+            System.out.println((i + 1) + ".  No:" + temp.getTeacher_no() + " Name:" + temp.getName() + " Course:" + temp.getCoursesName());
+        }
+        int teacher_index = new Scanner(System.in).nextInt();
+        Teachers teachers = teachersList.get(teacher_index - 1);
+        boolean EXIT = false;
+        while (!EXIT) {
+            System.out.println("1.批准选课");
+            System.out.println("2.打分");
+            System.out.println("3.返回上级");
+            int teacher_op = new Scanner(System.in).nextInt();
+            switch (teacher_op) {
+                case 1:
+                    System.out.println("输入批准的学生编号:");
+                    for (int i = 0; i < teachers.getCourses().getCourse_students().size(); i++) {
+                        Student student = teachers.getCourses().getCourse_students().get(i);
+                        System.out.println((i + 1) + ".  name:" + student.getName());
+                    }
+                    Student student = studentList.get(new Scanner(System.in).nextInt() - 1);
+                    teachers.Approve_Course(student);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    EXIT = true;
+                    break;
+            }
+        }
 
     }
 
@@ -77,7 +140,7 @@ public class Test {
         Scanner inputindex_num = new Scanner(System.in);
         while (!EXIT) {
             System.out.println("1.添加学生信息（非选课）");
-            System.out.println("2.学生选课");
+            System.out.println("2.学生选课系统");
             System.out.println("3.教师系统");
             System.out.println("4.退出");
             int index_num = inputindex_num.nextInt();
@@ -89,7 +152,7 @@ public class Test {
                     EleClass();
                     break;
                 case 3:
-
+                    TeacherClass();
                     break;
                 case 4:
                     EXIT = true;

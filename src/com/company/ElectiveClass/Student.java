@@ -28,8 +28,9 @@ public class Student {
 
     void Delete_Course(String course_no) {
         for (int i = 0; i < sc.size(); i++) {
-            if (sc.get(i).getCourse_no()==course_no){
-                sc.remove(sc.get(i));
+            if (sc.get(i).getCourse_no().equals(course_no)){
+                sc.remove(i);
+                System.out.println("remove!");
                 break;
             }
         }

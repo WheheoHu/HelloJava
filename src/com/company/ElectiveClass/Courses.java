@@ -36,4 +36,7 @@ public class Courses {
         course_students.remove(student);
     }
 
+    public List<Student> getCourse_students() {
+        return course_students;
+    }
 }

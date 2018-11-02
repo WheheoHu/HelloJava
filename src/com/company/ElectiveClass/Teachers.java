@@ -17,10 +17,10 @@ public class Teachers {
         this.courses = courses;
     }
 
-    void Approve_Course(Student student,boolean approved) {
+    void Approve_Course(Student student) {
         for (int i = 0; i < student.sc.size(); i++) {
             if (student.sc.get(i).getStu_no()==student.getStu_no()){
-                student.sc.get(i).setApproved(approved);
+                student.sc.get(i).setApproved(true);
                 break;
             }
         }
@@ -36,4 +36,27 @@ public class Teachers {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getCoursesName() {
+        return courses.getCourse_name();
+    }
+
+    public String getTeacher_no() {
+        return teacher_no;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public Courses getCourses() {
+        return courses;
+    }
 }
