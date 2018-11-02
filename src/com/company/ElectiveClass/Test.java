@@ -27,7 +27,9 @@ public class Test {
             studentList.add(st);
             inputstudent.close();
         }
-        catch(Exception e){}
+        catch(Exception e){}finally {
+
+        }
 
     }
 
