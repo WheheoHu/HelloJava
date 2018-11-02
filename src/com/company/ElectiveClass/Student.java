@@ -8,7 +8,7 @@ public class Student {
     private String stu_no;
     private String name;
     private String sex;
-    private int class_no;
+    private String class_no;
     private String major;
 
     public Student(String stu_no, String name, String sex, int class_no, String major) {
