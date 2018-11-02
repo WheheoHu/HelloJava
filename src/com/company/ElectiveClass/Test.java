@@ -5,19 +5,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Test {
-    static List<Courses> coursesList = new ArrayList<Courses>();
-    static List<Student> studentList = new ArrayList<Student>();
-    static List<Teachers> teachersList = new ArrayList<Teachers>();
+    private static List<Courses> coursesList = new ArrayList<>();
+    private static List<Student> studentList = new ArrayList<>();
+    private static List<Teachers> teachersList = new ArrayList<>();
 
-    static Courses math = new Courses("1", "math", "PB");
-    static Courses forlang = new Courses("2", "forlang", "PB");
-    static Courses java = new Courses("3", "java", "CS");
+    private static Courses math = new Courses("1", "math", "PB");
+    private static Courses forlang = new Courses("2", "forlang", "PB");
+    private static Courses java = new Courses("3", "java", "CS");
 
-    static Teachers tea1 = new Teachers("0001", "TEA1", "Man", "A");
-    static Teachers tea2 = new Teachers("0002", "TEA2", "Man", "B");
-    static Teachers tea3 = new Teachers("0003", "TEA3", "Man", "C");
+    private static Teachers tea1 = new Teachers("0001", "TEA1", "Man", "A");
+    private static Teachers tea2 = new Teachers("0002", "TEA2", "Man", "B");
+    private static Teachers tea3 = new Teachers("0003", "TEA3", "Man", "C");
 
-    static void AddStudent() {
+    private static void AddStudent() {
         System.out.println("请输入学生信息，用空格分开顺序为 学号 姓名 性别 班级 专业");
 
         Scanner inputstu = new Scanner(System.in);
@@ -27,13 +27,13 @@ public class Test {
 
     }
 
-    static void InitCourseList() {
+    private static void InitCourseList() {
         coursesList.add(math);
         coursesList.add(forlang);
         coursesList.add(java);
     }
 
-    static void InitTeacherList() {
+    private static void InitTeacherList() {
         tea1.setCourses(math);
         teachersList.add(tea1);
         tea2.setCourses(forlang);
@@ -42,7 +42,7 @@ public class Test {
         teachersList.add(tea3);
     }
 
-    static void EleClass() {
+    private static void EleClass() {
         System.out.println("请输入学生序号");
         for (int i = 0; i < studentList.size(); i++) {
             System.out.println((i + 1) + ". 姓名:" + studentList.get(i).getName() + " 学号:" + studentList.get(i).getStu_no());
@@ -98,7 +98,7 @@ public class Test {
         }
     }
 
-    static void TeacherClass() {
+    private static void TeacherClass() {
         System.out.println("输入教师序号：");
         for (int i = 0; i < teachersList.size(); i++) {
             Teachers temp = teachersList.get(i);
@@ -115,14 +115,12 @@ public class Test {
             switch (teacher_op) {
                 case 1:
                     System.out.println("输入批准的学生编号:");
-                    for (int i = 0; i < teachers.getCourses().getCourse_students().size(); i++) {
-                        Student student = teachers.getCourses().getCourse_students().get(i);
-                        System.out.println((i + 1) + ".  name:" + student.getName());
-                    }
+
                     Student student = studentList.get(new Scanner(System.in).nextInt() - 1);
                     teachers.Approve_Course(student);
                     break;
                 case 2:
+
                     break;
                 case 3:
                     EXIT = true;

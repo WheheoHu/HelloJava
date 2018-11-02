@@ -1,7 +1,6 @@
 package com.company.ElectiveClass;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Student_Courses {
     private String course_no;

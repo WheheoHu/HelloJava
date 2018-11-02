@@ -14,7 +14,7 @@ public class Courses {
         this.major = major;
     }
 
-    private List<Student> course_students = new ArrayList<Student>();
+    private List<Student> course_students = new ArrayList<>();
 
     public String getCourse_name() {
         return course_name;
