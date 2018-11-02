@@ -21,15 +21,15 @@ public class Test {
 
     static void AddStudent() {
         System.out.println("请输入学生信息，用空格分开顺序为 学号 姓名 性别 班级 专业");
-        try {
-            Scanner inputstu=new Scanner(System.in);
-            String[] stu_info=inputstu.next().split(" ");
-            Student st = new Student(stu_info[0], stu_info[1], stu_info[2], stu_info[3], stu_info[4]);
-            studentList.add(st);
-        } catch (Exception e) {
-        } finally {
 
+            Scanner inputstu=new Scanner(System.in);
+            String[] stu_info=inputstu.next().split("\\s+");
+        for (int i = 0; i < stu_info.length; i++) {
+            System.out.println(stu_info[i]);
         }
+           // Student st = new Student(stu_info[0], stu_info[1], stu_info[2], stu_info[3], stu_info[4]);
+            //studentList.add(st);
+            System.out.println(studentList.size());
 
     }
     static void InitCourseList() {
