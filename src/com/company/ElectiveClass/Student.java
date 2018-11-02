@@ -44,4 +44,12 @@ public class Student {
     public String getStu_no() {
         return stu_no;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMajor() {
+        return major;
+    }
 }
