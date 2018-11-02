@@ -11,7 +11,7 @@ public class Student {
     private String class_no;
     private String major;
 
-    public Student(String stu_no, String name, String sex, int class_no, String major) {
+    public Student(String stu_no, String name, String sex, String class_no, String major) {
         this.stu_no = stu_no;
         this.name = name;
         this.sex = sex;
@@ -19,7 +19,7 @@ public class Student {
         this.major = major;
     }
 
-    private List<Student_Courses> sc = new ArrayList<Student_Courses>();
+     List<Student_Courses> sc = new ArrayList<Student_Courses>();
 
     void Select_Course(String course_no) {
         Student_Courses newsc = new Student_Courses(course_no, this.stu_no, false, 0);
@@ -33,5 +33,9 @@ public class Student {
         for (int i = 0; i < sc.size(); i++) {
             System.out.println(sc.get(i).getScore());
         }
+    }
+
+    public String getStu_no() {
+        return stu_no;
     }
 }

@@ -6,25 +6,24 @@ public class Teachers {
     private String name;
     private String sex;
     private String department;
-
+    private Courses courses;
     public Teachers(String teacher_no, String name, String sex, String department) {
         this.teacher_no = teacher_no;
         this.name = name;
         this.sex = sex;
         this.department = department;
     }
-
-    void Approve_Course(Student_Courses student_courses) {
-        student_courses.setApproved(true);
-        for (int i = 0; i < Test.coursesList.size(); i++) {
-            if (Test.coursesList.get(i).getCourse_no()==student_courses.getCourse_no()){
-
-                break;
-            }
-        }
+    public void setCourses(Courses courses) {
+        this.courses = courses;
     }
 
-    void Score_Course() {
+    void Approve_Course(Student student) {
+        
+    }
+
+
+
+    void Score_Course(Student student) {
 
     }
 

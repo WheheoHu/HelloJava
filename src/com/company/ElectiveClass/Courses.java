@@ -14,7 +14,7 @@ public class Courses {
         this.major = major;
     }
 
-    private List Course_Students = new ArrayList();
+    private List<Student> course_students=new ArrayList<Student>();
 
     public String getCourse_name() {
         return course_name;
@@ -29,10 +29,15 @@ public class Courses {
     }
 
     void AddStudent(Student student) {
-        Course_Students.add(student);
+        course_students.add(student);
     }
 
     void RemoveStudent(Student student) {
-        Course_Students.remove(student);
+        course_students.remove(student);
     }
+
+    void setStu_Score(Student stu){
+
+    }
+
 }
