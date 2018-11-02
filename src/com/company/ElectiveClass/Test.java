@@ -1,5 +1,7 @@
 package com.company.ElectiveClass;
 
+import jdk.nashorn.api.tree.WhileLoopTree;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -22,21 +24,19 @@ public class Test {
     static void AddStudent() {
         System.out.println("请输入学生信息，用空格分开顺序为 学号 姓名 性别 班级 专业");
 
-            Scanner inputstu=new Scanner(System.in);
-            String[] stu_info=inputstu.next().split("\\s+");
-        for (int i = 0; i < stu_info.length; i++) {
-            System.out.println(stu_info[i]);
-        }
-           // Student st = new Student(stu_info[0], stu_info[1], stu_info[2], stu_info[3], stu_info[4]);
-            //studentList.add(st);
-            System.out.println(studentList.size());
+        Scanner inputstu = new Scanner(System.in);
+        String[] stu_info = inputstu.nextLine().split("\\s+");
+        Student st = new Student(stu_info[0], stu_info[1], stu_info[2], stu_info[3], stu_info[4]);
+        studentList.add(st);
 
     }
+
     static void InitCourseList() {
         coursesList.add(math);
         coursesList.add(forlang);
         coursesList.add(java);
     }
+
     static void InitTeacherList() {
         tea1.setCourses(math);
         teachersList.add(tea1);
@@ -45,13 +45,34 @@ public class Test {
         tea3.setCourses(java);
         teachersList.add(tea3);
     }
-    static void EleClass(){
-        System.out.println(studentList.size());
-        for (int i = 0; i <studentList.size(); i++) {
-            System.out.println((i+1));
-            //+". "+studentList.get(i).getName()+" "+studentList.get(i).getStu_no()
+
+    static void EleClass() {
+        System.out.println("请输入学生序号");
+        for (int i = 0; i < studentList.size(); i++) {
+            System.out.println((i + 1)+". 姓名:"+studentList.get(i).getName()+" 学号:"+studentList.get(i).getStu_no());
         }
+        Scanner inputindex=new Scanner(System.in);
+        int index=inputindex.nextInt();
+        while (index>studentList.size()||index<1){
+            for (int i = 0; i < studentList.size(); i++) {
+                System.out.println((i + 1)+". 姓名:"+studentList.get(i).getName()+" 学号:"+studentList.get(i).getStu_no());
+            }
+            System.out.println("序号非法重新输入序号：");
+            Scanner reinput=new Scanner(System.in);
+            index=reinput.nextInt();
+        }
+
+        Student stu=studentList.get(index-1);
+
+        System.out.println("选择操作：");
+        System.out.println("1.添加课程");
+        System.out.println("2.删除课程");
+        System.out.println("3.显示成绩");
+        Scanner stuop=new Scanner(System.in);
+
+
     }
+
     static private boolean EXIT = false;
 
     public static void main(String[] args) {
