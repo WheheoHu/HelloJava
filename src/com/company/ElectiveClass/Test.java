@@ -1,9 +1,5 @@
 package com.company.ElectiveClass;
 
-import jdk.nashorn.api.tree.WhileLoopTree;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
