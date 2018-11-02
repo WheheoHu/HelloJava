@@ -17,14 +17,23 @@ public class Teachers {
         this.courses = courses;
     }
 
-    void Approve_Course(Student student) {
-        
+    void Approve_Course(Student student,boolean approved) {
+        for (int i = 0; i < student.sc.size(); i++) {
+            if (student.sc.get(i).getStu_no()==student.getStu_no()){
+                student.sc.get(i).setApproved(approved);
+                break;
+            }
+        }
+        courses.AddStudent(student);
     }
 
-
-
-    void Score_Course(Student student) {
-
+    void Score_Course(Student student,int score) {
+        for (int i = 0; i < student.sc.size(); i++) {
+            if (student.sc.get(i).getStu_no()==student.getStu_no()){
+                student.sc.get(i).setScore(score);
+                break;
+            }
+        }
     }
 
 }

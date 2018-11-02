@@ -22,11 +22,17 @@ public class Student {
      List<Student_Courses> sc = new ArrayList<Student_Courses>();
 
     void Select_Course(String course_no) {
-        Student_Courses newsc = new Student_Courses(course_no, this.stu_no, false, 0);
-        sc.add(newsc);
+        Student_Courses SelectACourse = new Student_Courses(course_no, this.stu_no, false, 0);
+        sc.add(SelectACourse);
     }
 
-    void Delete_Course() {
+    void Delete_Course(String course_no) {
+        for (int i = 0; i < sc.size(); i++) {
+            if (sc.get(i).getCourse_no()==course_no){
+                sc.remove(sc.get(i));
+                break;
+            }
+        }
     }
 
     void Disp_Score() {
