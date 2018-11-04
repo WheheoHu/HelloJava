@@ -134,7 +134,7 @@ public class Test {
                     Student student_score = teachers.getCourses().getCourse_students().get(scorestu_int - 1);
                     System.out.println("输入成绩:");
                     int score = new Scanner(System.in).nextInt();
-                    teachers.Score_Course(student_score,score);
+                    teachers.Score_Course(student_score, score);
                     break;
                 case 3:
                     EXIT = true;
