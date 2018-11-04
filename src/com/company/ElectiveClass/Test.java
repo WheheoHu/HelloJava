@@ -115,12 +115,26 @@ public class Test {
             switch (teacher_op) {
                 case 1:
                     System.out.println("输入批准的学生编号:");
-
-                    Student student = studentList.get(new Scanner(System.in).nextInt() - 1);
-                    teachers.Approve_Course(student);
+                    for (int i = 0; i < studentList.size(); i++) {
+                        for (int j = 0; j < studentList.get(i).sc.size(); j++) {
+                            if (studentList.get(i).sc.get(j).getCourse_no().equals(teachers.getCourses().getCourse_no())) {
+                                System.out.println((i + 1) + ": " + studentList.get(i).getName());
+                            }
+                        }
+                    }
+                    Student student_approve = studentList.get(new Scanner(System.in).nextInt() - 1);
+                    teachers.Approve_Course(student_approve);
                     break;
                 case 2:
-
+                    System.out.println("输入打分的学生编号：");
+                    for (int i = 0; i < teachers.getCourses().getCourse_students().size(); i++) {
+                        System.out.println((i + 1) + ": " + teachers.getCourses().getCourse_students().get(i).getName());
+                    }
+                    int scorestu_int = new Scanner(System.in).nextInt();
+                    Student student_score = teachers.getCourses().getCourse_students().get(scorestu_int - 1);
+                    System.out.println("输入成绩:");
+                    int score = new Scanner(System.in).nextInt();
+                    teachers.Score_Course(student_score,score);
                     break;
                 case 3:
                     EXIT = true;

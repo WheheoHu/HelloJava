@@ -7,12 +7,14 @@ public class Student_Courses {
     private String stu_no;
     private boolean approved;
     private int score;
+    private Courses courses;
 
     public Student_Courses(String course_no, String stu_no, boolean approved, int score) {
         this.course_no = course_no;
         this.stu_no = stu_no;
         this.approved = approved;
         this.score = score;
+
     }
 
     public void setApproved(boolean approved) {

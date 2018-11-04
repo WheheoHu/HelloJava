@@ -19,7 +19,7 @@ public class Student {
         this.major = major;
     }
 
-     List<Student_Courses> sc = new ArrayList<Student_Courses>();
+    List<Student_Courses> sc = new ArrayList<Student_Courses>();
 
     void Select_Course(String course_no) {
         Student_Courses SelectACourse = new Student_Courses(course_no, this.stu_no, false, 0);
@@ -28,7 +28,7 @@ public class Student {
 
     void Delete_Course(String course_no) {
         for (int i = 0; i < sc.size(); i++) {
-            if (sc.get(i).getCourse_no().equals(course_no)){
+            if (sc.get(i).getCourse_no().equals(course_no)) {
                 sc.remove(i);
                 System.out.println("remove!");
                 break;
@@ -38,7 +38,7 @@ public class Student {
 
     void Disp_Score() {
         for (int i = 0; i < sc.size(); i++) {
-            System.out.println(sc.get(i).getScore());
+            System.out.println(sc.get(i).getCourse_no() + ": " + sc.get(i).getScore());
         }
     }
 
