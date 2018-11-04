@@ -135,13 +135,12 @@ public class Test {
     public static void main(String[] args) {
         InitCourseList();
         InitTeacherList();
-        Scanner inputindex_num = new Scanner(System.in);
         while (!EXIT) {
             System.out.println("1.添加学生信息（非选课）");
             System.out.println("2.学生选课系统");
             System.out.println("3.教师系统");
             System.out.println("4.退出");
-            int index_num = inputindex_num.nextInt();
+            int index_num = new Scanner(System.in).nextInt();
             switch (index_num) {
                 case 1:
                     AddStudent();
