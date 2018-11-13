@@ -6,21 +6,12 @@ import java.awt.*;
 
 public class Cacula extends JFrame {
     public Cacula() {
+        String result="";
         this.setBounds(0, 0, 500, 500);
-        Container container = this.getContentPane();
-        JPanel paneltop = new JPanel(new BorderLayout());
-        JPanel panelmid = new JPanel(new GridLayout(4, 4, 10, 10));
-
-        //top
-        paneltop.add(new JTextField("结果"), BorderLayout.EAST);
-        paneltop.add(new JButton("计算"), BorderLayout.WEST);
-        container.add(paneltop, BorderLayout.NORTH);
-        //mid
-        String[] s = "7,8,9,＋,-,*,/,4,5,6,1,2,3,.".split(",");
-        for (int i = 0; i < s.length; i++) {
-            panelmid.add(new JButton(s[i]));
-        }
-        container.add(panelmid, BorderLayout.CENTER);
+        JTextField result_textfield=new JTextField(result,20);
+        JButton jButton_clear=new JButton("clear");
+        JButton jButton_plus=new JButton("+");
+        JButton jButton_sub=new JButton("-");
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
