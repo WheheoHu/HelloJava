@@ -8,7 +8,7 @@ public class Cacula extends JFrame {
     public Cacula() {
         String result = "";
         this.setBounds(100, 100, 500, 500);
-        JTextField result_textfield = new JTextField(result, 30);
+        JTextField result_textfield = new JTextField(result, 20);
         JButton jButton_clear = new JButton("clear");
         JButton jButton_plus = new JButton("+");
         JButton jButton_sub = new JButton("-");
@@ -50,9 +50,9 @@ public class Cacula extends JFrame {
 
         JPanel top_pan = new JPanel();
         top_pan.setLayout(new BorderLayout());
+        top_pan.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         top_pan.add(result_textfield, BorderLayout.WEST);
         top_pan.add(jButton_clear, BorderLayout.EAST);
-
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(mainpan,BorderLayout.CENTER);
         this.getContentPane().add(top_pan,BorderLayout.NORTH);
