@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class Calculator {
     private String result;
 
-    private JFrame mainframe = new JFrame("Calculator");
+    JFrame mainframe = new JFrame("Calculator");
 
 
     JTextField result_textfield = new JTextField(result, 20);
@@ -27,6 +27,8 @@ public class Calculator {
     JButton jButton_delete = new JButton("<-");
 
     JButton jButton_point = new JButton(".");
+
+    String num = "";
     JButton jButton_nine = new JButton("9");
     JButton jButton_eight = new JButton("8");
     JButton jButton_seven = new JButton("7");
@@ -44,8 +46,7 @@ public class Calculator {
     JPanel pan_num = new JPanel();
     JPanel pan_oper = new JPanel();
 
-
-    public Calculator() {
+    public void setGUI() {
         result_textfield.setEditable(false);
         result_textfield.setHorizontalAlignment(JTextField.RIGHT);
 
@@ -91,12 +92,16 @@ public class Calculator {
         mainframe.getContentPane().add(pan_view, BorderLayout.NORTH);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainframe.setVisible(true);
+    }
+
+    public void setListeners() {
         //数字按键的Listener
         class Listener_num implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s_num = ((JButton) e.getSource()).getText();
-                result_textfield.setText(s_num);
+                num += s_num;
+                result_textfield.setText(num);
             }
         }
         Listener_num listener_num = new Listener_num();
@@ -111,7 +116,7 @@ public class Calculator {
         jButton_nine.addActionListener(listener_num);
         jButton_zero.addActionListener(listener_num);
 
-        //操作Listener
+        //二元操作Listener
         class Listener_oper_2 implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,6 +131,7 @@ public class Calculator {
         jButton_divide.addActionListener(listener_oper_2);
         jButton_power.addActionListener(listener_oper_2);
 
+        //一元操作符的Listener
         class Listener_oper_1 implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,6 +157,12 @@ public class Calculator {
         jButton_point.addActionListener(listener_point);
 
 
+    }
+
+    public Calculator() {
+
+        setGUI();
+        setListeners();
     }
 
 }
