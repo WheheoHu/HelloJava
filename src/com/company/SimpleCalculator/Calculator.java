@@ -3,6 +3,8 @@ package com.company.SimpleCalculator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Calculator {
     private String result;
@@ -10,40 +12,42 @@ public class Calculator {
     private JFrame mainframe = new JFrame("Calculator");
 
 
-    private JTextField result_textfield = new JTextField(result, 20);
-    private JButton jButton_clear = new JButton("CE");
-    private JButton jButton_plus = new JButton("+");
-    private JButton jButton_sub = new JButton("-");
-    private JButton jButton_multi = new JButton("x");
-    private JButton jButton_divide = new JButton("÷");
-    private JButton jButton_sqrt = new JButton("sqrt");
-    private JButton jButton_sin = new JButton("sin");
-    private JButton jButton_cos = new JButton("cos");
-    private JButton jButton_power = new JButton("x^y");
-    private JButton jButton_equal = new JButton("=");
-    private JButton jButton_ln = new JButton("ln");
-    private JButton jButton_delete = new JButton("<-");
+    JTextField result_textfield = new JTextField(result, 20);
+    JButton jButton_clear = new JButton("CE");
+    JButton jButton_plus = new JButton("+");
+    JButton jButton_sub = new JButton("-");
+    JButton jButton_multi = new JButton("x");
+    JButton jButton_divide = new JButton("÷");
+    JButton jButton_sqrt = new JButton("sqrt");
+    JButton jButton_sin = new JButton("sin");
+    JButton jButton_cos = new JButton("cos");
+    JButton jButton_power = new JButton("x^y");
+    JButton jButton_equal = new JButton("=");
+    JButton jButton_ln = new JButton("ln");
+    JButton jButton_delete = new JButton("<-");
 
-   private JButton jButton_point = new JButton(".");
-   private JButton jButton_nine = new JButton("9");
-   private JButton jButton_eight = new JButton("8");
-   private JButton jButton_seven = new JButton("7");
-   private JButton jButton_six = new JButton("6");
-   private JButton jButton_five = new JButton("5");
-   private JButton jButton_four = new JButton("4");
-   private JButton jButton_three = new JButton("3");
-   private JButton jButton_two = new JButton("2");
-   private JButton jButton_one = new JButton("1");
-   private JButton jButton_zero = new JButton("0");
+    JButton jButton_point = new JButton(".");
+    JButton jButton_nine = new JButton("9");
+    JButton jButton_eight = new JButton("8");
+    JButton jButton_seven = new JButton("7");
+    JButton jButton_six = new JButton("6");
+    JButton jButton_five = new JButton("5");
+    JButton jButton_four = new JButton("4");
+    JButton jButton_three = new JButton("3");
+    JButton jButton_two = new JButton("2");
+    JButton jButton_one = new JButton("1");
+    JButton jButton_zero = new JButton("0");
 
 
-   private JPanel pan_view = new JPanel();
-   private JPanel pan_main = new JPanel();
-   private JPanel pan_num = new JPanel();
-   private JPanel pan_oper = new JPanel();
+    JPanel pan_view = new JPanel();
+    JPanel pan_main = new JPanel();
+    JPanel pan_num = new JPanel();
+    JPanel pan_oper = new JPanel();
+
 
     public Calculator() {
         result_textfield.setEditable(false);
+        result_textfield.setHorizontalAlignment(JTextField.RIGHT);
 
         pan_num.setLayout(new GridLayout(4, 3, 5, 5));
         pan_num.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -87,6 +91,65 @@ public class Calculator {
         mainframe.getContentPane().add(pan_view, BorderLayout.NORTH);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainframe.setVisible(true);
+        //数字按键的Listener
+        class Listener_num implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String s_num = ((JButton) e.getSource()).getText();
+                result_textfield.setText(s_num);
+            }
+        }
+        Listener_num listener_num = new Listener_num();
+        jButton_one.addActionListener(listener_num);
+        jButton_two.addActionListener(listener_num);
+        jButton_three.addActionListener(listener_num);
+        jButton_four.addActionListener(listener_num);
+        jButton_five.addActionListener(listener_num);
+        jButton_six.addActionListener(listener_num);
+        jButton_seven.addActionListener(listener_num);
+        jButton_eight.addActionListener(listener_num);
+        jButton_nine.addActionListener(listener_num);
+        jButton_zero.addActionListener(listener_num);
+
+        //操作Listener
+        class Listener_oper_2 implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String s_oper = ((JButton) e.getSource()).getText();
+                result_textfield.setText(s_oper);
+            }
+        }
+        Listener_oper_2 listener_oper_2 = new Listener_oper_2();
+        jButton_plus.addActionListener(listener_oper_2);
+        jButton_sub.addActionListener(listener_oper_2);
+        jButton_multi.addActionListener(listener_oper_2);
+        jButton_divide.addActionListener(listener_oper_2);
+        jButton_power.addActionListener(listener_oper_2);
+
+        class Listener_oper_1 implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String s_op1 = ((JButton) e.getSource()).getText();
+                result_textfield.setText(s_op1);
+            }
+        }
+        Listener_oper_1 listener_oper_1 = new Listener_oper_1();
+        jButton_sin.addActionListener(listener_oper_1);
+        jButton_cos.addActionListener(listener_oper_1);
+        jButton_ln.addActionListener(listener_oper_1);
+        jButton_sqrt.addActionListener(listener_oper_1);
+
+        //小数点
+        class Listener_point implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String s_point = ((JButton) e.getSource()).getText();
+                result_textfield.setText(s_point);
+            }
+        }
+        Listener_point listener_point = new Listener_point();
+        jButton_point.addActionListener(listener_point);
+
 
     }
 
