@@ -7,12 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Calculator {
-    private String result;
+    private String result = "";
 
     JFrame mainframe = new JFrame("Calculator");
 
 
     JTextField result_textfield = new JTextField(result, 20);
+
     JButton jButton_clear = new JButton("CE");
     JButton jButton_plus = new JButton("+");
     JButton jButton_sub = new JButton("-");
@@ -28,7 +29,7 @@ public class Calculator {
 
     JButton jButton_point = new JButton(".");
 
-    String num = "";
+
     JButton jButton_nine = new JButton("9");
     JButton jButton_eight = new JButton("8");
     JButton jButton_seven = new JButton("7");
@@ -64,6 +65,7 @@ public class Calculator {
         pan_num.add(jButton_zero);
         pan_num.add(jButton_point);
 
+
         pan_oper.setLayout(new GridLayout(4, 3, 5, 5));
         pan_oper.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         pan_oper.add(jButton_plus);
@@ -94,14 +96,34 @@ public class Calculator {
         mainframe.setVisible(true);
     }
 
+    String numString = "";
+    boolean isInt=true;
+    double numDouble;
+    int numInt;
+    String oper_2 = "";
+    String oper_1 = "";
+    boolean isUnaryoperator = false;
+    boolean isBinaryoperator = false;
+    //boolean stopinputnum = false;
+
     public void setListeners() {
+
         //数字按键的Listener
         class Listener_num implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s_num = ((JButton) e.getSource()).getText();
-                num += s_num;
-                result_textfield.setText(num);
+                numString += s_num;
+                result_textfield.setText(numString);
+                if (isInt){
+                    numInt=Integer.parseInt(numString);
+                    System.out.println(numInt);
+                }
+                else {
+                numDouble = Double.parseDouble(numString);
+                System.out.println(numDouble);
+                }
+
             }
         }
         Listener_num listener_num = new Listener_num();
@@ -120,8 +142,10 @@ public class Calculator {
         class Listener_oper_2 implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String s_oper = ((JButton) e.getSource()).getText();
-                result_textfield.setText(s_oper);
+                String operString = ((JButton) e.getSource()).getText();
+                result_textfield.setText(operString);
+                oper_2 = operString;
+                isBinaryoperator=true;
             }
         }
         Listener_oper_2 listener_oper_2 = new Listener_oper_2();
@@ -135,8 +159,10 @@ public class Calculator {
         class Listener_oper_1 implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String s_op1 = ((JButton) e.getSource()).getText();
-                result_textfield.setText(s_op1);
+                String op1String = ((JButton) e.getSource()).getText();
+                oper_1=op1String;
+                result_textfield.setText(oper_1+"("+numString+")");
+                isUnaryoperator=true;
             }
         }
         Listener_oper_1 listener_oper_1 = new Listener_oper_1();
@@ -150,7 +176,9 @@ public class Calculator {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s_point = ((JButton) e.getSource()).getText();
-                result_textfield.setText(s_point);
+                numString+=s_point;
+                result_textfield.setText(numString);
+                isInt=false;
             }
         }
         Listener_point listener_point = new Listener_point();
@@ -158,6 +186,11 @@ public class Calculator {
 
 
     }
+
+    public void cal() {
+
+    }
+
 
     public Calculator() {
 
