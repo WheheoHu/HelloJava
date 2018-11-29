@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Calculator {
     private String result = "";
@@ -116,6 +117,7 @@ public class Calculator {
                 String s_num = ((JButton) e.getSource()).getText();
                 numString += s_num;
                 result_textfield.setText(numString);
+
                 if (isInt) {
                     numInt = Integer.parseInt(numString);
                     System.out.println(numInt);
@@ -123,6 +125,7 @@ public class Calculator {
                     numDouble = Double.parseDouble(numString);
                     System.out.println(numDouble);
                 }
+
 
             }
         }

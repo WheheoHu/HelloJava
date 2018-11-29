@@ -9,6 +9,7 @@ public class Setup {
         }catch(Exception e){
             e.printStackTrace();
         }
+
         Calculator calculator=new Calculator();
     }
 }
