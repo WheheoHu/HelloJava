@@ -96,8 +96,9 @@ public class Calculator {
         mainframe.setVisible(true);
     }
 
+    int result_int = 0;
     String numString = "";
-    boolean isInt=true;
+    boolean isInt = true;
     double numDouble;
     int numInt;
     String oper_2 = "";
@@ -105,6 +106,7 @@ public class Calculator {
     boolean isUnaryoperator = false;
     boolean isBinaryoperator = false;
     //boolean stopinputnum = false;
+    final Cal cal = new Cal();
 
     public void setListeners() {
 
@@ -115,13 +117,13 @@ public class Calculator {
                 String s_num = ((JButton) e.getSource()).getText();
                 numString += s_num;
                 result_textfield.setText(numString);
-                if (isInt){
-                    numInt=Integer.parseInt(numString);
+                if (isInt) {
+                    numInt = Integer.parseInt(numString);
+                    result_int = numInt;
                     System.out.println(numInt);
-                }
-                else {
-                numDouble = Double.parseDouble(numString);
-                System.out.println(numDouble);
+                } else {
+                    numDouble = Double.parseDouble(numString);
+                    System.out.println(numDouble);
                 }
 
             }
@@ -145,7 +147,8 @@ public class Calculator {
                 String operString = ((JButton) e.getSource()).getText();
                 result_textfield.setText(operString);
                 oper_2 = operString;
-                isBinaryoperator=true;
+                isBinaryoperator = true;
+
             }
         }
         Listener_oper_2 listener_oper_2 = new Listener_oper_2();
@@ -160,9 +163,9 @@ public class Calculator {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String op1String = ((JButton) e.getSource()).getText();
-                oper_1=op1String;
-                result_textfield.setText(oper_1+"("+numString+")");
-                isUnaryoperator=true;
+                oper_1 = op1String;
+                result_textfield.setText(oper_1 + "(" + numString + ")");
+                isUnaryoperator = true;
             }
         }
         Listener_oper_1 listener_oper_1 = new Listener_oper_1();
@@ -176,9 +179,9 @@ public class Calculator {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s_point = ((JButton) e.getSource()).getText();
-                numString+=s_point;
+                numString += s_point;
                 result_textfield.setText(numString);
-                isInt=false;
+                isInt = false;
             }
         }
         Listener_point listener_point = new Listener_point();
@@ -187,8 +190,21 @@ public class Calculator {
 
     }
 
-    public void cal() {
+    public Double reader() {
+        Double num;
+        String str;
+        str = result_textfield.getText();
+        num = Double.valueOf(str);
 
+        return num;
+    }
+
+    private void writer(final Double numDouble) {
+        if (numDouble.isNaN()) {
+            result_textfield.setText("");
+        } else {
+            result_textfield.setText(numDouble.toString());
+        }
     }
 
 
