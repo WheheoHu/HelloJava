@@ -96,16 +96,13 @@ public class Calculator {
         mainframe.setVisible(true);
     }
 
-    int result_int = 0;
+
     String numString = "";
     boolean isInt = true;
-    double numDouble;
-    int numInt;
+
     String oper_2 = "";
     String oper_1 = "";
-    boolean isUnaryoperator = false;
-    boolean isBinaryoperator = false;
-    //boolean stopinputnum = false;
+
     final Cal cal = new Cal();
 
     public void setListeners() {
@@ -114,12 +111,13 @@ public class Calculator {
         class Listener_num implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
+                double numDouble;
+                int numInt;
                 String s_num = ((JButton) e.getSource()).getText();
                 numString += s_num;
                 result_textfield.setText(numString);
                 if (isInt) {
                     numInt = Integer.parseInt(numString);
-                    result_int = numInt;
                     System.out.println(numInt);
                 } else {
                     numDouble = Double.parseDouble(numString);
@@ -144,10 +142,29 @@ public class Calculator {
         class Listener_oper_2 implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
+                final Object source_bi = e.getSource();
                 String operString = ((JButton) e.getSource()).getText();
-                result_textfield.setText(operString);
+                // result_textfield.setText(operString);
+                System.out.println(operString);
                 oper_2 = operString;
-                isBinaryoperator = true;
+                if (source_bi.equals(jButton_plus)) {
+                    writer(cal.calculateBi(Cal.BiOperatorModes.add, reader()));
+                }
+                if (source_bi.equals(jButton_sub)) {
+                    writer(cal.calculateBi(Cal.BiOperatorModes.minus, reader()));
+                }
+                if (source_bi.equals(jButton_multi)) {
+                    writer(cal.calculateBi(Cal.BiOperatorModes.multiply, reader()));
+                }
+                if (source_bi.equals(jButton_divide)) {
+
+                    writer(cal.calculateBi(Cal.BiOperatorModes.divide, reader()));
+
+                }
+                if (source_bi.equals(jButton_power)) {
+                    writer(cal.calculateBi(Cal.BiOperatorModes.xpowerofy, reader()));
+                }
+                numString = "";
 
             }
         }
@@ -165,7 +182,6 @@ public class Calculator {
                 String op1String = ((JButton) e.getSource()).getText();
                 oper_1 = op1String;
                 result_textfield.setText(oper_1 + "(" + numString + ")");
-                isUnaryoperator = true;
             }
         }
         Listener_oper_1 listener_oper_1 = new Listener_oper_1();
@@ -187,7 +203,24 @@ public class Calculator {
         Listener_point listener_point = new Listener_point();
         jButton_point.addActionListener(listener_point);
 
+        class Listener_equal implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                writer(cal.calculateEqual(reader()));
+            }
+        }
+        Listener_equal listener_equal = new Listener_equal();
+        jButton_equal.addActionListener(listener_equal);
 
+        class Listener_clear implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                writer(cal.reset());
+                numString="";
+            }
+        }
+        Listener_clear listener_clear = new Listener_clear();
+        jButton_clear.addActionListener(listener_clear);
     }
 
     public Double reader() {

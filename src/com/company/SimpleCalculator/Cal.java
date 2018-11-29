@@ -28,8 +28,13 @@ public class Cal {
         if (mode == BiOperatorModes.multiply) {
             return num1 * num2;
         }
+        try{
         if (mode == BiOperatorModes.divide) {
             return num1 / num2;
+        }}
+        catch (ArithmeticException e){
+            String e1=e.getMessage();
+            System.out.println(e1);
         }
         if (mode == BiOperatorModes.xpowerofy) {
             return pow(num1,num2);
@@ -47,7 +52,9 @@ public class Cal {
             return Double.NaN;
         } else {
             num2 = num;
+
             num1 = calculateBiImpl();
+
             mode = newMode;
             return num1;
         }
