@@ -228,9 +228,7 @@ public class Calculator {
 
     public Double reader() {
         Double num;
-        String str;
-        str = result_textfield.getText();
-        num = Double.valueOf(str);
+        num = Double.valueOf(result_textfield.getText());
 
         return num;
     }
