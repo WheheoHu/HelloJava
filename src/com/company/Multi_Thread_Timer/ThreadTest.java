@@ -2,9 +2,15 @@ package com.company.Multi_Thread_Timer;
 
 public class ThreadTest {
     public static void main(String[] args) {
-        for (int i = 0; i < 8; i++) {
-            Thread thread=new Thread(new TreadDemo());
-            thread.start();
+        try {
+            for (int i = 0; i < 8; i++) {
+                Thread thread = new Thread(new TreadDemo());
+                thread.start();
+                thread.sleep(1000);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
         }
     }
 }
