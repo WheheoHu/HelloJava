@@ -1,5 +1,7 @@
 package com.company.Multi_Thread_Timer;
 
+import java.util.Scanner;
+
 public class ThreadTest {
     public static void main(String[] args) {
         try {
@@ -7,6 +9,7 @@ public class ThreadTest {
                 Thread thread = new Thread(new TreadDemo());
                 thread.start();
                 thread.sleep(1000);
+
             }
         }
         catch(Exception e){
