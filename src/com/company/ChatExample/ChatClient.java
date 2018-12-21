@@ -13,7 +13,6 @@ import java.net.Socket;
 class ClientSocketThread implements Runnable{
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		try {
 			ChatClient.contentText.append("Waiting Connect"+"\n");
 			Socket s=new Socket(ChatClient.ipText.getText(), Integer.parseInt(ChatClient.portText.getText()));
@@ -42,7 +41,6 @@ class ClientSocketThread implements Runnable{
 			}
 
 		} catch (NumberFormatException | IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
     }
@@ -119,14 +117,14 @@ public class ChatClient extends JFrame implements ActionListener {
 		
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		new ChatClient();
 		
 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+
 		if(e.getActionCommand().equals("CONTENT"))
 		{
 			ConnectServer();
