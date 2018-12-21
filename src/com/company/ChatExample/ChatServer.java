@@ -16,7 +16,6 @@ import java.net.UnknownHostException;
 class SocketThread implements Runnable{
     @Override
 	public void run() {
-		// TODO Auto-generated method stub
 		try {
             Socket soc = ChatServer.server.accept();
 			ChatServer.contentText.append("Server receive connect");
@@ -39,7 +38,6 @@ class SocketThread implements Runnable{
 			ChatServer.contentText.append("connect finished"+"\n");
 			System.exit(0);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -81,11 +79,11 @@ public class ChatServer extends JFrame implements ActionListener{
 		try {
 			ipText.setText(InetAddress.getLocalHost().getHostAddress());
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
-        Button waitForMesButton = new Button("Waitting Massage");
+        Button waitForMesButton = new Button("Waiting Massage");
 		waitForMesButton.addActionListener(this);
 		
 		Panel contentPanel=new Panel();
@@ -122,13 +120,11 @@ public class ChatServer extends JFrame implements ActionListener{
 		
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		new ChatServer();
 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		//System.out.println(e.getActionCommand());
 		if(e.getActionCommand().equals("WAITING"))
 		{
@@ -148,7 +144,6 @@ public class ChatServer extends JFrame implements ActionListener{
 			System.out.println("SERVER STARTED");
 
 		} catch (NumberFormatException | IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
