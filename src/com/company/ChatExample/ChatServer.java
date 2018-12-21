@@ -50,7 +50,7 @@ class SocketThread implements Runnable {
 
 public class ChatServer extends JFrame implements ActionListener {
     private static TextField portText;
-    static TextArea contentText;
+    static JTextArea contentText;
     static TextField inputText;
 
     static BufferedReader m_input;
@@ -87,9 +87,9 @@ public class ChatServer extends JFrame implements ActionListener {
 
         Panel contentPanel = new Panel();
         contentPanel.setLayout(new FlowLayout());
-        Label contentLabel = new Label("Com");
+        Label contentLabel = new Label("Content:\n");
         contentLabel.setSize(40, 40);
-        contentText = new TextArea();
+        contentText = new JTextArea();
         contentPanel.add(contentLabel);
         contentPanel.add(contentText);
 
@@ -121,13 +121,12 @@ public class ChatServer extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         new ChatServer();
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //System.out.println(e.getActionCommand());
-        if (e.getActionCommand().equals("WAITING")) {
+        System.out.println(e.getActionCommand());
+        if (e.getActionCommand().equals("Waiting Massage")) {
             CreateServer();
         } else if (e.getActionCommand().equals("SEND")) {
             Send();
@@ -139,8 +138,9 @@ public class ChatServer extends JFrame implements ActionListener {
     private void CreateServer() {
         contentText.append("SERVER STARTED\n");
         try {
+            //System.out.println(Integer.parseInt(ChatServer.portText.getText()));
             server = new ServerSocket(Integer.parseInt(ChatServer.portText.getText()));
-            System.out.println("SERVER STARTED");
+           // System.out.println("SERVER STARTED");
 
         } catch (NumberFormatException | IOException e1) {
             e1.printStackTrace();
