@@ -18,7 +18,7 @@ class SocketThread implements Runnable {
     public void run() {
         try {
             Socket soc = ChatServer.server.accept();
-            ChatServer.contentText.append("Server receive connect");
+            ChatServer.contentText.append("Server receive connect\n");
             ChatServer.m_output = new PrintWriter(soc.getOutputStream());
             ChatServer.m_input = new BufferedReader(new InputStreamReader(
                     soc.getInputStream()));
@@ -87,7 +87,7 @@ public class ChatServer extends JFrame implements ActionListener {
 
         Panel contentPanel = new Panel();
         contentPanel.setLayout(new FlowLayout());
-        Label contentLabel = new Label("Content:\n");
+        Label contentLabel = new Label("CONTENT");
         contentLabel.setSize(40, 40);
         contentText = new JTextArea();
         contentPanel.add(contentLabel);

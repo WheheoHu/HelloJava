@@ -53,7 +53,7 @@ class ClientSocketThread implements Runnable {
 public class ChatClient extends JFrame implements ActionListener {
     static TextField ipText;
     static TextField portText;
-    static TextArea contentText;
+    static JTextArea contentText;
     static TextField inputText;
 
     static BufferedReader m_input;
@@ -86,7 +86,7 @@ public class ChatClient extends JFrame implements ActionListener {
         contentPanel.setLayout(new FlowLayout());
         Label contentLabel = new Label("CONTENT");
         contentLabel.setSize(40, 40);
-        contentText = new TextArea();
+        contentText = new JTextArea();
         contentPanel.add(contentLabel);
         contentPanel.add(contentText);
 
@@ -99,7 +99,7 @@ public class ChatClient extends JFrame implements ActionListener {
         inputPanel.add(inputLabel);
         inputPanel.add(inputText);
 
-        Button sendButton = new Button("SENT");
+        Button sendButton = new Button("SEND");
         sendButton.addActionListener(this);
 
         add(ipPanel);
@@ -120,13 +120,12 @@ public class ChatClient extends JFrame implements ActionListener {
 
         new ChatClient();
 
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getActionCommand().equals("CONTENT")) {
+        if (e.getActionCommand().equals("CONNECT")) {
             ConnectServer();
         } else if (e.getActionCommand().equals("SEND")) {
             Send();
