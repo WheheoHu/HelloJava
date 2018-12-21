@@ -135,11 +135,11 @@ public class ChatClient extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getActionCommand()=="连接")
+		if(e.getActionCommand()=="CONTENT")
 		{
 			ConnectServer();
 		}
-		else if(e.getActionCommand()=="发送")
+		else if(e.getActionCommand()=="SEND")
 		{
 			Send();
 		}
@@ -151,7 +151,7 @@ public class ChatClient extends JFrame implements ActionListener {
 
 	void Send()
 	{
-		contentText.append("客户端:"+inputText.getText()+"\n");
+		contentText.append("Client:"+inputText.getText()+"\n");
 		m_output.println(inputText.getText()+"\n");
 		m_output.flush();
 		inputText.setText("");
