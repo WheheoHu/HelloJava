@@ -15,7 +15,7 @@ class ClientSocketThread implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		try {
-			ChatClient.contentText.append("Waitting Connect"+"\n");
+			ChatClient.contentText.append("Waiting Connect"+"\n");
 			Socket s=new Socket(ChatClient.ipText.getText(), Integer.parseInt(ChatClient.portText.getText()));
 			
 			
@@ -23,11 +23,11 @@ class ClientSocketThread implements Runnable{
 			ChatClient.m_input=new BufferedReader(new InputStreamReader(
 					s.getInputStream()));
 			ChatClient.inputText.setEnabled(true);
-			String mes="";		//来自服务器的信息
+			String mes;		//来自服务器的信息
 			while(true)
 			{
 				do{
-					mes=(String)ChatClient.m_input.readLine();
+					mes= ChatClient.m_input.readLine();
 					System.out.println(mes);
 					ChatClient.contentText.append("SERVER:"+mes+"\n");
 				}while(!isEnd(mes.trim()));
@@ -41,35 +41,27 @@ class ClientSocketThread implements Runnable{
 				System.exit(0);
 			}
 
-		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
+		} catch (NumberFormatException | IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	}
-	boolean isEnd(String m)
+    }
+	private boolean isEnd(String m)
 	{
-		if(m.equalsIgnoreCase("quit"))
-			return true;
-		else
-			return false;
+        return m.equalsIgnoreCase("quit");
 	}
 	
 }
 public class ChatClient extends JFrame implements ActionListener {
-	public static TextField ipText;
+	static TextField ipText;
 	static TextField portText;
-	public static TextArea contentText;
-	public static TextField inputText;
-	Button connectButton;
-	Button sendButton;
+	static TextArea contentText;
+	static TextField inputText;
+
+    static BufferedReader m_input;
+	static PrintWriter m_output;
 	
-	public static BufferedReader m_input;
-	public static PrintWriter m_output;
-	
-	public ChatClient()
+	private ChatClient()
 	{
 		super("Chat Client");
 
@@ -89,8 +81,8 @@ public class ChatClient extends JFrame implements ActionListener {
 		portText=new TextField(10);
 		portPanel.add(portLabel);
 		portPanel.add(portText);
-	
-		connectButton=new Button("CONNECT");
+
+        Button connectButton = new Button("CONNECT");
 		connectButton.addActionListener(this);
 		
 		Panel contentPanel=new Panel();
@@ -109,8 +101,8 @@ public class ChatClient extends JFrame implements ActionListener {
 		inputText=new TextField(40);
 		inputPanel.add(inputLabel);
 		inputPanel.add(inputText);
-		
-		sendButton=new Button("SENT");
+
+        Button sendButton = new Button("SENT");
 		sendButton.addActionListener(this);
 		
 		add(ipPanel);
@@ -135,21 +127,21 @@ public class ChatClient extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getActionCommand()=="CONTENT")
+		if(e.getActionCommand().equals("CONTENT"))
 		{
 			ConnectServer();
 		}
-		else if(e.getActionCommand()=="SEND")
+		else if(e.getActionCommand().equals("SEND"))
 		{
 			Send();
 		}
 	}
-	void ConnectServer()
+	private void ConnectServer()
 	{
 		new Thread(new ClientSocketThread()).start();
 	}
 
-	void Send()
+	private void Send()
 	{
 		contentText.append("Client:"+inputText.getText()+"\n");
 		m_output.println(inputText.getText()+"\n");

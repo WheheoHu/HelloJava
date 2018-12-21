@@ -1,43 +1,34 @@
 package com.company.ChatExample;
 
 import javax.swing.*;
-import java.awt.Button;
-import java.awt.Choice;
-import java.awt.FlowLayout;
-import java.awt.Frame;
-import java.awt.Label;
-import java.awt.Panel;
-import java.awt.TextArea;
-import java.awt.TextField;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
 class SocketThread implements Runnable{
-	Socket soc;
-	@Override
+    @Override
 	public void run() {
 		// TODO Auto-generated method stub
 		try {
-			soc=ChatServer.server.accept();
-			ChatServer.contentText.append("Server recive connect");
+            Socket soc = ChatServer.server.accept();
+			ChatServer.contentText.append("Server receive connect");
 			ChatServer.m_output=new PrintWriter(soc.getOutputStream());
 			ChatServer.m_input=new BufferedReader(new InputStreamReader(
 					soc.getInputStream()));
-			ChatServer.m_output.println("conected");
+			ChatServer.m_output.println("connected");
 			ChatServer.m_output.flush();
 			ChatServer.inputText.setEnabled(true);
-			String mes="";
+			String mes;
 			do{
-				mes=(String)ChatServer.m_input.readLine();
+				mes=ChatServer.m_input.readLine();
 				ChatServer.contentText.append("Client:"+mes+"\n");
 			}while(!isEnd(mes.trim()));
 			ChatServer.m_output.println("quit");
@@ -52,36 +43,30 @@ class SocketThread implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	boolean isEnd(String m)
+	private boolean isEnd(String m)
 	{
-		if(m.equalsIgnoreCase("quit"))
-			return true;
-		else
-			return false;
+        return m.equalsIgnoreCase("quit");
 	}
 	
 }
 public class ChatServer extends JFrame implements ActionListener{
-	TextField ipText;
-	static TextField portText;
-	public static TextArea contentText;
-	public static TextField inputText;
-	Button waitForMesButton;
-	Button sendButton;
+    private static TextField portText;
+	static TextArea contentText;
+	static TextField inputText;
+
+    static BufferedReader m_input;
+	static PrintWriter m_output;
 	
-	public static BufferedReader m_input;
-	public static PrintWriter m_output;
-	
-	public ChatServer()
+	private ChatServer()
 	{
 		super("Chat Server");
 		setLayout(new FlowLayout());
-		Choice cb=new Choice();
+		//Choice cb=new Choice();
 		Panel ipPanel=new Panel();
 		ipPanel.setLayout(new FlowLayout());
 		Label ipLabel=new Label("Local IP:");
-		ipLabel.setSize(40,40);		
-		ipText=new TextField();
+		ipLabel.setSize(40,40);
+        TextField ipText = new TextField();
 		ipPanel.add(ipLabel);
 		ipPanel.add(ipText);
 		
@@ -99,8 +84,8 @@ public class ChatServer extends JFrame implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		waitForMesButton=new Button("Waitting Massage");
+
+        Button waitForMesButton = new Button("Waitting Massage");
 		waitForMesButton.addActionListener(this);
 		
 		Panel contentPanel=new Panel();
@@ -119,8 +104,8 @@ public class ChatServer extends JFrame implements ActionListener{
 		inputText=new TextField();
 		inputPanel.add(inputLabel);
 		inputPanel.add(inputText);
-		
-		sendButton=new Button("SEND");
+
+        Button sendButton = new Button("SEND");
 		sendButton.addActionListener(this);
 		
 		add(ipPanel);
@@ -145,35 +130,32 @@ public class ChatServer extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//System.out.println(e.getActionCommand());
-		if(e.getActionCommand()=="WAITTING")
+		if(e.getActionCommand().equals("WAITING"))
 		{
 			CreateServer();
 		}
-		else if(e.getActionCommand()=="SEND")
+		else if(e.getActionCommand().equals("SEND"))
 		{
 			Send();
 		}
 	}
-	public static ServerSocket server;
-	void CreateServer()
+	static ServerSocket server;
+	private void CreateServer()
 	{
 		contentText.append("SERVER STARTED\n");
 		try {
 			server=new ServerSocket(Integer.parseInt(ChatServer.portText.getText()));
 			System.out.println("SERVER STARTED");
 
-		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
+		} catch (NumberFormatException | IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
-		new Thread(new SocketThread()).start();
+        new Thread(new SocketThread()).start();
 	}
 
-	void Send()
+	private void Send()
 	{
 		contentText.append("SERVER:"+inputText.getText()+"\n");
 		m_output.println(inputText.getText()+"\n");
