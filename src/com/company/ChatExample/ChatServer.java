@@ -59,7 +59,6 @@ public class ChatServer extends JFrame implements ActionListener {
     private ChatServer() {
         super("Chat Server");
         setLayout(new FlowLayout());
-        //Choice cb=new Choice();
         Panel ipPanel = new Panel();
         ipPanel.setLayout(new FlowLayout());
         Label ipLabel = new Label("Local IP:");
