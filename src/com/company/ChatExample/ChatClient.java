@@ -21,23 +21,23 @@ class ClientSocketThread implements Runnable {
             ChatClient.contentText.append("Waiting Connect" + "\n");
             Socket s = new Socket(ChatClient.ipText.getText(), Integer.parseInt(ChatClient.portText.getText()));
 
+            ChatClient.ClientInput = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            ChatClient.ClientOutput = new PrintWriter(s.getOutputStream());
 
-            ChatClient.m_output = new PrintWriter(s.getOutputStream());
-            ChatClient.m_input = new BufferedReader(new InputStreamReader(s.getInputStream()));
             ChatClient.inputText.setEnabled(true);
             String mes;
             while (true) {
                 do {
-                    mes = ChatClient.m_input.readLine();
+                    mes = ChatClient.ClientInput.readLine();
                     System.out.println(mes);
                     ChatClient.contentText.append("SERVER:" + mes + "\n");
                 } while (!isEnd(mes.trim()));
 
-                ChatClient.m_output.println("quit");
+                ChatClient.ClientOutput.println("quit");
                 System.out.println("Connection interruption");
-                ChatClient.m_output.flush();
-                ChatClient.m_output.close();
-                ChatClient.m_input.close();
+                ChatClient.ClientOutput.flush();
+                ChatClient.ClientOutput.close();
+                ChatClient.ClientInput.close();
                 s.close();
                 ChatClient.contentText.append("Connection interruption" + "\n");
                 System.exit(0);
@@ -60,8 +60,8 @@ public class ChatClient extends JFrame implements ActionListener {
     static JTextArea contentText;
     static TextField inputText;
 
-    static BufferedReader m_input;
-    static PrintWriter m_output;
+    static BufferedReader ClientInput;
+    static PrintWriter ClientOutput;
 
     private ChatClient() {
         super("Chat Client");
@@ -162,8 +162,8 @@ public class ChatClient extends JFrame implements ActionListener {
 
     private void Send() {
         contentText.append("Client:" + inputText.getText() + "\n");
-        m_output.println(inputText.getText() + "\n");
-        m_output.flush();
+        ClientOutput.println(inputText.getText() + "\n");
+        ClientOutput.flush();
         inputText.setText("");
     }
 }

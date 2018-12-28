@@ -21,21 +21,21 @@ class SocketThread implements Runnable {
         try {
             Socket soc = ChatServer.server.accept();
             ChatServer.contentText.append("Server receive connect\n");
-            ChatServer.m_output = new PrintWriter(soc.getOutputStream());
-            ChatServer.m_input = new BufferedReader(new InputStreamReader(
+            ChatServer.ServerOutput = new PrintWriter(soc.getOutputStream());
+            ChatServer.ServerInput = new BufferedReader(new InputStreamReader(
                     soc.getInputStream()));
-            ChatServer.m_output.println("connected");
-            ChatServer.m_output.flush();
+            ChatServer.ServerOutput.println("Connected");
+            ChatServer.ServerOutput.flush();
             ChatServer.inputText.setEnabled(true);
             String mes;
             do {
-                mes = ChatServer.m_input.readLine();
+                mes = ChatServer.ServerInput.readLine();
                 ChatServer.contentText.append("Client:" + mes + "\n");
             } while (!isEnd(mes.trim()));
-            ChatServer.m_output.println("quit");
-            ChatServer.m_output.flush();
-            ChatServer.m_output.close();
-            ChatServer.m_input.close();
+            ChatServer.ServerOutput.println("quit");
+            ChatServer.ServerOutput.flush();
+            ChatServer.ServerOutput.close();
+            ChatServer.ServerInput.close();
             soc.close();
             ChatServer.contentText.append("connect finished" + "\n");
             System.exit(0);
@@ -51,63 +51,81 @@ class SocketThread implements Runnable {
 }
 
 public class ChatServer extends JFrame implements ActionListener {
-    private static TextField portText;
+    private static JTextField portText;
     static JTextArea contentText;
-    static TextField inputText;
-    static BufferedReader m_input;
-    static PrintWriter m_output;
+    static JTextField inputText;
+    static BufferedReader ServerInput;
+    static PrintWriter ServerOutput;
 
     private ChatServer() {
         super("Chat Server");
-        setLayout(new FlowLayout());
-        Panel ipPanel = new Panel();
+        setLayout(new BorderLayout());
+
+
+        JPanel ipPanel = new JPanel();
         ipPanel.setLayout(new FlowLayout());
-        Label ipLabel = new Label("Local IP:");
+        JLabel ipLabel = new JLabel("Local IP:");
         ipLabel.setSize(40, 40);
-        TextField ipText = new TextField();
-        ipPanel.add(ipLabel);
-        ipPanel.add(ipText);
-
-        Panel portPanel = new Panel();
-        portPanel.setLayout(new FlowLayout());
-        Label portLabel = new Label("Local port:");
-        portLabel.setSize(80, 40);
-        portText = new TextField();
-        portText.setText("9999");
-        portPanel.add(portLabel);
-        portPanel.add(portText);
-
+        JTextField ipText = new JTextField();
         try {
             ipText.setText(InetAddress.getLocalHost().getHostAddress());
         } catch (UnknownHostException e) {
 
             e.printStackTrace();
         }
+        ipPanel.add(ipLabel);
+        ipPanel.add(ipText);
 
-        Button waitForMesButton = new Button("Waiting Massage");
+        JPanel portPanel = new JPanel();
+        portPanel.setLayout(new FlowLayout());
+        JLabel portLabel = new JLabel("Local port:");
+        portLabel.setSize(80, 40);
+        portText = new JTextField();
+        portText.setText("9999");
+        portPanel.add(portLabel);
+        portPanel.add(portText);
+
+
+        JButton waitForMesButton = new JButton("Start Server");
         waitForMesButton.addActionListener(this);
 
-        Panel contentPanel = new Panel();
+
+
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new FlowLayout());
+        JLabel inputLabel = new JLabel("INPUT");
+        inputLabel.setSize(40, 40);
+        inputText = new JTextField();
+        inputText.setColumns(20);
+        inputPanel.add(inputLabel);
+        inputPanel.add(inputText);
+
+        JButton sendButton = new JButton("SEND");
+        sendButton.addActionListener(this);
+
+        JPanel netpanel=new JPanel();
+        netpanel.setLayout(new FlowLayout());
+        netpanel.add(ipPanel);
+        netpanel.add(portPanel);
+        netpanel.add(waitForMesButton);
+
+        JPanel leftpanel=new JPanel();
+        leftpanel.setLayout(new BorderLayout());
+        leftpanel.add(netpanel,BorderLayout.NORTH);
+        leftpanel.add(inputPanel,BorderLayout.CENTER);
+        leftpanel.add(sendButton,BorderLayout.PAGE_END);
+
+        JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new FlowLayout());
-        Label contentLabel = new Label("CONTENT");
-        contentLabel.setSize(40, 40);
+        JLabel contentLabel = new JLabel("CONTENT");
+        contentLabel.setSize(100, 40);
         contentText = new JTextArea();
         contentPanel.add(contentLabel);
         contentPanel.add(contentText);
 
 
-        Panel inputPanel = new Panel();
-        inputPanel.setLayout(new FlowLayout());
-        Label inputLabel = new Label("INPUT");
-        inputLabel.setSize(40, 40);
-        inputText = new TextField();
-        inputPanel.add(inputLabel);
-        inputPanel.add(inputText);
-
-        Button sendButton = new Button("SEND");
-        sendButton.addActionListener(this);
         JLabel timelabel = new JLabel();
-
         class timeThread implements Runnable {
             @Override
             public void run() {
@@ -121,17 +139,20 @@ public class ChatServer extends JFrame implements ActionListener {
         new Thread(new timeThread()).start();
 
 
-        add(ipPanel);
-        add(portPanel);
-        add(waitForMesButton);
-        add(contentPanel);
-        add(inputPanel);
-        add(sendButton);
-        add(timelabel);
+       add(leftpanel,BorderLayout.WEST);
+        add(contentPanel,BorderLayout.EAST);
+
 
         setSize(500, 500);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+//        try {
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+//                | UnsupportedLookAndFeelException e) {
+//            e.printStackTrace();
+//        }
+
 
     }
 
@@ -142,7 +163,7 @@ public class ChatServer extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getActionCommand());
-        if (e.getActionCommand().equals("Waiting Massage")) {
+        if (e.getActionCommand().equals("Start Server")) {
             CreateServer();
         } else if (e.getActionCommand().equals("SEND")) {
             Send();
@@ -167,8 +188,8 @@ public class ChatServer extends JFrame implements ActionListener {
 
     private void Send() {
         contentText.append("SERVER:" + inputText.getText() + "\n");
-        m_output.println(inputText.getText() + "\n");
-        m_output.flush();
+        ServerOutput.println(inputText.getText() + "\n");
+        ServerOutput.flush();
         inputText.setText("");
     }
 
