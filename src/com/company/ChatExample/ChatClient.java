@@ -8,7 +8,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,16 +23,16 @@ class ClientSocketThread implements Runnable {
 
 
             ChatClient.m_output = new PrintWriter(s.getOutputStream());
-            ChatClient.m_input = new BufferedReader(new InputStreamReader(
-                    s.getInputStream()));
+            ChatClient.m_input = new BufferedReader(new InputStreamReader(s.getInputStream()));
             ChatClient.inputText.setEnabled(true);
-            String mes;        //来自服务器的信息
+            String mes;
             while (true) {
                 do {
                     mes = ChatClient.m_input.readLine();
                     System.out.println(mes);
                     ChatClient.contentText.append("SERVER:" + mes + "\n");
                 } while (!isEnd(mes.trim()));
+
                 ChatClient.m_output.println("quit");
                 System.out.println("Connection interruption");
                 ChatClient.m_output.flush();
@@ -69,7 +71,12 @@ public class ChatClient extends JFrame implements ActionListener {
         ipPanel.setLayout(new FlowLayout());
         Label ipLabel = new Label("SERVER IP:");
         ipLabel.setSize(40, 40);
-        ipText = new TextField(40);
+        ipText = new TextField(30);
+        try {
+            ipText.setText(InetAddress.getLocalHost().getHostAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         ipPanel.add(ipLabel);
         ipPanel.add(ipText);
 
@@ -106,12 +113,13 @@ public class ChatClient extends JFrame implements ActionListener {
 
         JLabel timelabel = new JLabel();
 
-        class timeThread implements Runnable{
+        class timeThread implements Runnable {
             @Override
             public void run() {
 
-                while (true){
-                    timelabel.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));}
+                while (true) {
+                    timelabel.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                }
 
             }
 
