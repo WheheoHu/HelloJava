@@ -1,6 +1,7 @@
 package com.company.ChatExample;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,8 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 class SocketThread implements Runnable {
     @Override
@@ -52,7 +55,6 @@ public class ChatServer extends JFrame implements ActionListener {
     private static TextField portText;
     static JTextArea contentText;
     static TextField inputText;
-
     static BufferedReader m_input;
     static PrintWriter m_output;
 
@@ -72,6 +74,7 @@ public class ChatServer extends JFrame implements ActionListener {
         Label portLabel = new Label("Local port:");
         portLabel.setSize(80, 40);
         portText = new TextField();
+        portText.setText("9999");
         portPanel.add(portLabel);
         portPanel.add(portText);
 
@@ -104,6 +107,20 @@ public class ChatServer extends JFrame implements ActionListener {
 
         Button sendButton = new Button("SEND");
         sendButton.addActionListener(this);
+        JLabel timelabel = new JLabel();
+
+        class timeThread implements Runnable {
+            @Override
+            public void run() {
+
+                while (true) {
+                    timelabel.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                }
+            }
+
+        }
+        new Thread(new timeThread()).start();
+
 
         add(ipPanel);
         add(portPanel);
@@ -111,7 +128,7 @@ public class ChatServer extends JFrame implements ActionListener {
         add(contentPanel);
         add(inputPanel);
         add(sendButton);
-
+        add(timelabel);
 
         setSize(500, 500);
         setVisible(true);
@@ -140,7 +157,7 @@ public class ChatServer extends JFrame implements ActionListener {
         try {
             //System.out.println(Integer.parseInt(ChatServer.portText.getText()));
             server = new ServerSocket(Integer.parseInt(ChatServer.portText.getText()));
-           // System.out.println("SERVER STARTED");
+            // System.out.println("SERVER STARTED");
 
         } catch (NumberFormatException | IOException e1) {
             e1.printStackTrace();

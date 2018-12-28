@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 class ClientSocketThread implements Runnable {
     @Override
@@ -101,6 +103,20 @@ public class ChatClient extends JFrame implements ActionListener {
 
         Button sendButton = new Button("SEND");
         sendButton.addActionListener(this);
+
+        JLabel timelabel = new JLabel();
+
+        class timeThread implements Runnable{
+            @Override
+            public void run() {
+
+                while (true){
+                    timelabel.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));}
+
+            }
+
+        }
+        new Thread(new timeThread()).start();
 
         add(ipPanel);
         add(portPanel);
