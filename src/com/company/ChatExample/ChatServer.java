@@ -90,8 +90,6 @@ public class ChatServer extends JFrame implements ActionListener {
         waitForMesButton.addActionListener(this);
 
 
-
-
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new FlowLayout());
         JLabel inputLabel = new JLabel("INPUT");
@@ -104,17 +102,17 @@ public class ChatServer extends JFrame implements ActionListener {
         JButton sendButton = new JButton("SEND");
         sendButton.addActionListener(this);
 
-        JPanel netpanel=new JPanel();
+        JPanel netpanel = new JPanel();
         netpanel.setLayout(new FlowLayout());
         netpanel.add(ipPanel);
         netpanel.add(portPanel);
         netpanel.add(waitForMesButton);
 
-        JPanel leftpanel=new JPanel();
+        JPanel leftpanel = new JPanel();
         leftpanel.setLayout(new BorderLayout());
-        leftpanel.add(netpanel,BorderLayout.NORTH);
-        leftpanel.add(inputPanel,BorderLayout.CENTER);
-        leftpanel.add(sendButton,BorderLayout.PAGE_END);
+        leftpanel.add(netpanel, BorderLayout.NORTH);
+        leftpanel.add(inputPanel, BorderLayout.CENTER);
+        leftpanel.add(sendButton, BorderLayout.PAGE_END);
 
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new FlowLayout());
@@ -139,8 +137,8 @@ public class ChatServer extends JFrame implements ActionListener {
         new Thread(new timeThread()).start();
 
 
-       add(leftpanel,BorderLayout.WEST);
-        add(contentPanel,BorderLayout.EAST);
+        add(leftpanel, BorderLayout.WEST);
+        add(contentPanel, BorderLayout.EAST);
 
 
         setSize(500, 500);
